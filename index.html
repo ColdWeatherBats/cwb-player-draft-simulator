@@ -418,8 +418,8 @@
     }
 
     /* When tab active */
-    .board-panel.mobile-hidden { display: none; }
-    .right-col.mobile-visible { display: flex; }
+    .board-panel.mobile-hidden { display: none !important; }
+    .right-col.mobile-visible  { display: flex !important; }
 
     /* Round banner */
     .round-banner {
@@ -883,8 +883,14 @@ function startDraft() {
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('draft-screen').style.display = 'block';
   mobileTab = 'board'; logCount = 0; updateLogBadge();
-  setMobileTab('board');
-  renderRoster(); renderQueue(); renderPlayerList(); updateHeader(); nextPick();
+  renderRoster(); renderQueue(); renderPlayerList(); updateHeader();
+  // Defer mobile layout until after the DOM has painted
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      setMobileTab('board');
+      nextPick();
+    });
+  });
 }
 
 // ═══════════════════════════════════════════════════════
@@ -1336,31 +1342,48 @@ let logCount = 0;
 function setMobileTab(tab) {
   mobileTab = tab;
   const isMobile = window.innerWidth <= 768;
-  if (!isMobile) return;
 
   const board  = document.querySelector('.board-panel');
   const right  = document.getElementById('right-col');
   const roster = document.getElementById('my-roster');
   const log    = document.getElementById('draft-log');
+  if (!board || !right) return;
 
-  // Reset visibility
-  board.classList.remove('mobile-hidden');
-  right.classList.remove('mobile-visible');
-  roster.style.display = 'block';
-  log.style.display    = 'block';
-
-  if (tab === 'board') {
-    right.classList.remove('mobile-visible');
+  if (!isMobile) {
+    // Desktop: always show both, clear any mobile classes
     board.classList.remove('mobile-hidden');
+    right.classList.remove('mobile-visible');
+    right.style.display = '';
+    board.style.display = '';
+    if (roster) roster.style.display = '';
+    if (log)    log.style.display    = '';
+    return;
+  }
+
+  // Mobile: tab-driven single panel
+  if (tab === 'board') {
+    board.classList.remove('mobile-hidden');
+    right.classList.remove('mobile-visible');
   } else {
     board.classList.add('mobile-hidden');
     right.classList.add('mobile-visible');
     if (tab === 'roster') {
-      roster.style.display = 'block';
-      log.style.display    = 'none';
+      if (roster) roster.style.display = 'block';
+      if (log)    log.style.display    = 'none';
     } else {
-      roster.style.display = 'none';
-      log.style.display    = 'block';
+      if (roster) roster.style.display = 'none';
+      if (log)    log.style.display    = 'block';
+      // Clear log badge when viewing log
+      logCount = 0;
+      updateLogBadge();
+    }
+  }
+
+  // Update tab highlights
+  ['board','roster','log'].forEach(t => {
+    document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab);
+  });
+}.display    = 'block';
       // Clear log badge when viewing log
       logCount = 0;
       updateLogBadge();
