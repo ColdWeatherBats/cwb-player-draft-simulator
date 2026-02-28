@@ -363,6 +363,209 @@
   .commissioner-alert { background:linear-gradient(90deg,rgba(180,220,220,0.12),rgba(180,220,220,0.04)); border-bottom:2px solid rgba(180,220,220,0.4); padding:9px 20px; font-family:'Bebas Neue',sans-serif; font-size:16px; letter-spacing:3px; color:var(--ice-blue); text-align:center; flex-shrink:0; display:none; animation:flash 2s infinite; }
   .chip-commish { background:rgba(180,220,220,0.18); color:var(--ice-blue); border:1px solid rgba(180,220,220,0.4); animation:flash 1.4s infinite; }
 
+
+
+  /* ══════════════════════════════════════════
+     MOBILE RESPONSIVE — full redesign < 768px
+     ══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* Header */
+    header {
+      height: 56px;
+      padding: 0 14px;
+    }
+    .header-logo { height: 40px; }
+    .header-wordmark { font-size: 16px; letter-spacing: 2px; }
+    .header-wordmark span { font-size: 9px; letter-spacing: 2px; }
+    .header-status { font-size: 11px; letter-spacing: 1px; }
+
+    /* Setup screen */
+    #setup-screen { padding: 20px 16px; justify-content: flex-start; padding-top: 24px; }
+    .setup-logo-large { height: 90px; margin-bottom: 12px; }
+    .setup-title { font-size: 32px; letter-spacing: 2px; }
+    .setup-tagline { font-size: 11px; letter-spacing: 1px; }
+    .setup-card { padding: 24px 20px; }
+    .roster-grid { grid-template-columns: repeat(4, 1fr); gap: 4px; }
+    .roster-chip strong { font-size: 13px; }
+    .roster-chip span { font-size: 8px; }
+    .btn-start { font-size: 17px; letter-spacing: 4px; padding: 14px; }
+
+    /* Draft layout — full single column, tab-driven */
+    .draft-layout {
+      display: flex;
+      flex-direction: column;
+      height: calc(100vh - 56px);
+      overflow: hidden;
+    }
+
+    /* Board panel takes all space, right-col hidden by default */
+    .board-panel {
+      flex: 1;
+      border-right: none;
+      border-bottom: none;
+      min-height: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .right-col {
+      display: none; /* hidden — shown via tabs */
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+
+    /* When tab active */
+    .board-panel.mobile-hidden { display: none; }
+    .right-col.mobile-visible { display: flex; }
+
+    /* Round banner */
+    .round-banner {
+      font-size: 10px;
+      letter-spacing: 2px;
+      padding: 6px 14px;
+    }
+
+    /* Alerts */
+    .user-turn-alert {
+      font-size: 13px;
+      letter-spacing: 2px;
+      padding: 8px 14px;
+    }
+    .commissioner-alert {
+      font-size: 13px;
+      letter-spacing: 2px;
+      padding: 8px 14px;
+    }
+
+    /* Search toolbar */
+    .board-toolbar { padding: 8px 14px; gap: 8px; }
+    .board-toolbar-label { display: none; }
+    .search-input { font-size: 14px; padding: 8px 10px; }
+
+    /* Rank toggle — compress */
+    .rank-view-toggle { padding: 0 14px; overflow-x: auto; }
+    .rank-view-btn { font-size: 11px; padding: 7px 10px; letter-spacing: 1px; }
+    .rank-view-label { display: none; }
+
+    /* Filter tabs */
+    .filter-tabs { padding: 0 14px; }
+    .filter-tab { font-size: 11px; padding: 7px 10px; letter-spacing: 1px; }
+
+    /* List header */
+    .list-header { padding: 4px 14px; }
+
+    /* Player rows — bigger touch targets */
+    .player-row {
+      padding: 12px 14px;
+      gap: 6px;
+    }
+    .player-name { font-size: 14px; }
+    .player-meta { font-size: 11px; }
+    .btn-draft {
+      font-size: 12px;
+      padding: 8px 12px;
+      letter-spacing: 1px;
+    }
+    .rank-cwb, .rank-griff { font-size: 12px; }
+
+    /* Clock panel */
+    .clock-panel { padding: 10px 14px; }
+    .clock-label { font-size: 9px; }
+    .pick-chip { font-size: 11px; padding: 5px 10px; }
+
+    /* Roster panel */
+    .roster-panel {
+      flex: 1;
+      padding: 10px 14px;
+      overflow-y: auto;
+    }
+    .roster-slot { min-height: 36px; padding: 7px 10px; }
+    .slot-filled { font-size: 13px; }
+
+    /* Log panel — full height in tab view */
+    .log-panel {
+      height: 100%;
+      min-height: unset;
+      border-top: none;
+      flex: 1;
+      overflow-y: auto;
+    }
+    .log-entry { font-size: 13px; padding: 7px 0; }
+
+    /* Modal */
+    .modal-card {
+      padding: 24px 20px;
+      min-width: unset;
+      width: 92%;
+      max-width: 380px;
+    }
+    .modal-player-name { font-size: 24px; }
+    .modal-slot-btn { padding: 13px 14px; }
+    .modal-slot-label { font-size: 18px; }
+    .modal-slot-desc { font-size: 14px; }
+
+    /* Complete screen */
+    #complete-screen { padding: 24px 16px; }
+    .complete-header { gap: 14px; }
+    .complete-logo { height: 64px; }
+    .complete-title { font-size: 36px; letter-spacing: 2px; }
+    .final-grid { grid-template-columns: 1fr; gap: 12px; }
+
+    /* Mobile tab bar */
+    .mobile-tab-bar {
+      display: flex !important;
+      background: var(--navy);
+      border-top: 2px solid rgba(180,220,220,0.2);
+      flex-shrink: 0;
+      z-index: 50;
+    }
+
+    /* AI thinking */
+    .ai-thinking { font-size: 12px; padding: 10px; }
+  }
+
+  /* Tab bar — hidden on desktop, shown on mobile */
+  .mobile-tab-bar {
+    display: none;
+    width: 100%;
+  }
+  .mobile-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 6px 8px;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    cursor: pointer;
+    border-top: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mobile-tab.active { color: var(--ice-blue); border-top-color: var(--ice-blue); }
+  .mobile-tab svg { width: 18px; height: 18px; margin-bottom: 3px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  .mobile-tab-badge {
+    background: var(--ice-blue);
+    color: var(--navy-deep);
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 8px;
+    margin-left: 4px;
+    font-weight: 900;
+    vertical-align: middle;
+    display: none;
+  }
+  .mobile-tab-badge.visible { display: inline; }
+
 </style>
 </head>
 <body>
@@ -483,13 +686,29 @@
       <div class="ai-thinking" id="ai-thinking">&#9203; &nbsp; AI IS MAKING A PICK...</div>
       <div class="player-list" id="player-list"></div>
     </div>
-    <div class="right-col">
+    <div class="right-col" id="right-col">
       <div class="clock-panel">
         <div class="clock-label">On The Clock</div>
         <div class="pick-queue" id="pick-queue"></div>
       </div>
       <div class="roster-panel" id="my-roster"></div>
       <div class="log-panel" id="draft-log"><div class="log-label">Draft Log</div></div>
+    </div>
+  </div>
+
+  <!-- MOBILE TAB BAR -->
+  <div class="mobile-tab-bar" id="mobile-tab-bar">
+    <div class="mobile-tab active" id="tab-board" onclick="setMobileTab('board')">
+      <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+      Board
+    </div>
+    <div class="mobile-tab" id="tab-roster" onclick="setMobileTab('roster')">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Roster
+    </div>
+    <div class="mobile-tab" id="tab-log" onclick="setMobileTab('log')">
+      <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Log <span class="mobile-tab-badge" id="log-badge">0</span>
     </div>
   </div>
 </div>
@@ -663,6 +882,8 @@ function startDraft() {
   S = { teams, pickOrder, pickIdx:0, drafted: new Set(), commissionerMode };
   document.getElementById('setup-screen').style.display = 'none';
   document.getElementById('draft-screen').style.display = 'block';
+  mobileTab = 'board'; logCount = 0; updateLogBadge();
+  setMobileTab('board');
   renderRoster(); renderQueue(); renderPlayerList(); updateHeader(); nextPick();
 }
 
@@ -1031,9 +1252,11 @@ function addLog(round, teamIdx, team, player, isUser) {
   const label = log.querySelector('.log-label');
   const entry = document.createElement('div');
   entry.className = `log-entry${isUser ? (S.commissionerMode ? ' commissioner-pick' : ' user-pick') : ''}`;
-  const slotLabel = player.draftedSlot ? ` <span style="color:var(--text-dim);font-size:10px;">[${slotKeyToPos(player.draftedSlot)}]</span>` : '';
+  const slotLabel = player.draftedSlot ? ` <span style="color:var(--text-dim);font-size:10px;">[${ slotKeyToPos(player.draftedSlot)}]</span>` : '';
   entry.innerHTML = `<span class="log-pick">R${round}.${teamIdx+1}</span> <span class="log-team">${team.name.split(' ')[0]}</span> &rarr; ${player.name}${slotLabel}`;
   label.insertAdjacentElement('afterend', entry);
+  // Badge for mobile
+  if (mobileTab !== 'log') { logCount++; updateLogBadge(); }
 }
 
 function updateBanner(round, team) {
@@ -1084,6 +1307,8 @@ function showComplete() {
 
 function resetDraft() {
   S = {}; activeFilter = 'ALL'; rankView = 'both'; pendingDraftId = null; commissionerMode = false;
+  mobileTab = 'board'; logCount = 0;
+  updateLogBadge();
   document.getElementById('complete-screen').style.display  = 'none';
   document.getElementById('setup-screen').style.display     = 'flex';
   document.getElementById('draft-log').innerHTML            = '<div class="log-label">Draft Log</div>';
@@ -1102,8 +1327,78 @@ function resetDraft() {
   updateListHeader();
 }
 
-// Init header on load
+// ═══════════════════════════════════════════════════════
+// MOBILE TAB NAVIGATION
+// ═══════════════════════════════════════════════════════
+let mobileTab = 'board';
+let logCount = 0;
+
+function setMobileTab(tab) {
+  mobileTab = tab;
+  const isMobile = window.innerWidth <= 768;
+  if (!isMobile) return;
+
+  const board  = document.querySelector('.board-panel');
+  const right  = document.getElementById('right-col');
+  const roster = document.getElementById('my-roster');
+  const log    = document.getElementById('draft-log');
+
+  // Reset visibility
+  board.classList.remove('mobile-hidden');
+  right.classList.remove('mobile-visible');
+  roster.style.display = 'block';
+  log.style.display    = 'block';
+
+  if (tab === 'board') {
+    right.classList.remove('mobile-visible');
+    board.classList.remove('mobile-hidden');
+  } else {
+    board.classList.add('mobile-hidden');
+    right.classList.add('mobile-visible');
+    if (tab === 'roster') {
+      roster.style.display = 'block';
+      log.style.display    = 'none';
+    } else {
+      roster.style.display = 'none';
+      log.style.display    = 'block';
+      // Clear log badge when viewing log
+      logCount = 0;
+      updateLogBadge();
+    }
+  }
+
+  // Update tab highlights
+  ['board','roster','log'].forEach(t => {
+    document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab);
+  });
+}
+
+function updateLogBadge() {
+  const badge = document.getElementById('log-badge');
+  if (!badge) return;
+  if (mobileTab !== 'log' && logCount > 0) {
+    badge.textContent = logCount;
+    badge.classList.add('visible');
+  } else {
+    badge.classList.remove('visible');
+  }
+}
+
+// Init on load
 updateListHeader();
+updateLogBadge();
+  if (window.innerWidth > 768) {
+    // Restore desktop layout
+    document.querySelector('.board-panel')?.classList.remove('mobile-hidden');
+    document.getElementById('right-col')?.classList.remove('mobile-visible');
+    const roster = document.getElementById('my-roster');
+    const log    = document.getElementById('draft-log');
+    if (roster) roster.style.display = 'block';
+    if (log)    log.style.display    = 'block';
+  } else {
+    setMobileTab(mobileTab);
+  }
+});
 </script>
 </body>
 </html>
