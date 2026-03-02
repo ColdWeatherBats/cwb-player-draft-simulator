@@ -1383,17 +1383,6 @@ function setMobileTab(tab) {
   ['board','roster','log'].forEach(t => {
     document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab);
   });
-}.display    = 'block';
-      // Clear log badge when viewing log
-      logCount = 0;
-      updateLogBadge();
-    }
-  }
-
-  // Update tab highlights
-  ['board','roster','log'].forEach(t => {
-    document.getElementById(`tab-${t}`)?.classList.toggle('active', t === tab);
-  });
 }
 
 function updateLogBadge() {
@@ -1410,14 +1399,16 @@ function updateLogBadge() {
 // Init on load
 updateListHeader();
 updateLogBadge();
+
+window.addEventListener('resize', () => {
   if (window.innerWidth > 768) {
     // Restore desktop layout
     document.querySelector('.board-panel')?.classList.remove('mobile-hidden');
     document.getElementById('right-col')?.classList.remove('mobile-visible');
     const roster = document.getElementById('my-roster');
     const log    = document.getElementById('draft-log');
-    if (roster) roster.style.display = 'block';
-    if (log)    log.style.display    = 'block';
+    if (roster) roster.style.display = '';
+    if (log)    log.style.display    = '';
   } else {
     setMobileTab(mobileTab);
   }
